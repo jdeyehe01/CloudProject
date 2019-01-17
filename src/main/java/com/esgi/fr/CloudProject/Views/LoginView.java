@@ -8,7 +8,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.FormLayout;
-
+import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
@@ -35,6 +35,7 @@ public class LoginView extends CssLayout implements View {
 	private void buildUI() {
 		addStyleName("login-screen");
 		Component loginForm = buildLoginForm();
+	
 		VerticalLayout centeringLayout = new VerticalLayout();
 		//	        centeringLayout.setMargin(false);
 		//	        centeringLayout.setSpacing(false);
