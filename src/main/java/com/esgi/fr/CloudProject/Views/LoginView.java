@@ -1,5 +1,6 @@
 package com.esgi.fr.CloudProject.Views;
 
+import com.esgi.fr.CloudProject.Controller.Authentification;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.ui.Alignment;
@@ -63,6 +64,8 @@ public class LoginView extends CssLayout implements View {
 				// TODO Auto-generated method stub
 				Navigator n = event.getButton().getUI().getNavigator();
 				n.navigateTo(MyUI.HOLIDAYVIEW);
+				boolean a = Authentification.authenticate("jdujardin", "Azerty123@");
+
 			}
 		});
 		CssLayout buttons = new CssLayout();

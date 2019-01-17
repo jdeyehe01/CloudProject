@@ -12,8 +12,8 @@ public class Navigation {
 	private Button login;
 	
 	
-	
 	public Button getLoginButton (Component c) {
+
 		login = new Button("Login");
 		
 		login.addClickListener(new ClickListener() {
@@ -21,8 +21,10 @@ public class Navigation {
 			@Override
 			public void buttonClick(ClickEvent event) {
 				// TODO Auto-generated method stub
+
 				n = event.getButton().getUI().getNavigator();
 				n.getUI().getUI().setContent(c);
+				
 			}
 		});
 		return login;
