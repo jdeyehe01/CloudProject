@@ -2,14 +2,18 @@ package com.esgi.fr.CloudProject.Views;
 
 import javax.servlet.annotation.WebServlet;
 
+import com.esgi.fr.CloudProject.Models.User;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.navigator.Navigator;
-import com.vaadin.navigator.View;
+import com.vaadin.navigator.View;import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -24,19 +28,43 @@ import com.vaadin.ui.VerticalLayout;
 @Theme("mytheme")
 public class MyUI extends UI {
 	public static final String HOLIDAYVIEW = "holiday";
+	public static final String RHVIEW = "ressourceHumaine";
 	private Navigator navigator;
+    User loggedInUser;
+
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
     	setSizeFull();
         getPage().setTitle("Cloud Project");
-        //setContent(new LoginView());
         navigator = new Navigator(this, this);
         
+//        User toto = new User("BOBY","BOBY","BOBY","BOBY");
+//        this.setLoggedInUser(toto);
+        navigator.addViewChangeListener(new ViewChangeListener() {
+			
+			@Override
+			public boolean beforeViewChange(ViewChangeEvent event) {
+				if(  ( (MyUI)UI.getCurrent()).getLoggedInUser() == null && event.getNewView() instanceof HumainResourceView ||  ( (MyUI)UI.getCurrent()).getLoggedInUser() == null && event.getNewView() instanceof HolidaysView ) {
+                    Notification.show("Permission denied", Type.ERROR_MESSAGE);
+                    return false;
+				}
+				
+				return true;
+			}
+		});
         navigator.addView("", new LoginView());
+        navigator.addView(RHVIEW,new HumainResourceView() );        
         navigator.addView(HOLIDAYVIEW, new HolidaysView());
-        
         }
+    
+    public User getLoggedInUser(){
+        return loggedInUser;
+   }
+
+   public void setLoggedInUser(User user){
+        loggedInUser = user;
+  }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)

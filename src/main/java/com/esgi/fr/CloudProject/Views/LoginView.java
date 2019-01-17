@@ -8,7 +8,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.FormLayout;
-
+import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
@@ -35,6 +35,7 @@ public class LoginView extends CssLayout implements View {
 	private void buildUI() {
 		addStyleName("login-screen");
 		Component loginForm = buildLoginForm();
+	
 		VerticalLayout centeringLayout = new VerticalLayout();
 		//	        centeringLayout.setMargin(false);
 		//	        centeringLayout.setSpacing(false);
@@ -62,10 +63,20 @@ public class LoginView extends CssLayout implements View {
 			@Override
 			public void buttonClick(ClickEvent event) {
 				// TODO Auto-generated method stub
+<<<<<<< HEAD
 				Navigator n = event.getButton().getUI().getNavigator();
 				n.navigateTo(MyUI.HOLIDAYVIEW);
 				boolean a = Authentification.authenticate("jdujardin", "Azerty123@");
 
+=======
+
+				Boolean result = Authentification.authenticate("popol", "Azerty123@");
+
+				if(result){
+					Navigator n = event.getButton().getUI().getNavigator();
+					n.navigateTo(MyUI.HOLIDAYVIEW);
+				}
+>>>>>>> origin/master
 			}
 		});
 		CssLayout buttons = new CssLayout();
